@@ -1,13 +1,14 @@
 package com.bignerdranch.android.criminalintent;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,9 +47,11 @@ public class CrimeListFragment extends Fragment {
 
         private TextView mTitleTextView;
         private TextView mDateTextView;
+        //private Button mPoliceButton;
 
         public CrimeHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_crime, parent, false));
+            //super(inflater.inflate(R.layout.list_item_serious_crime, parent, false));
             itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.crime_title);
@@ -67,6 +70,7 @@ public class CrimeListFragment extends Fragment {
                     mCrime.getTitle() + " clicked!", Toast.LENGTH_SHORT)
                     .show();
         }
+
     }
 
     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
@@ -79,8 +83,8 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            //int view = getItemViewType(viewType);
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-
             return new CrimeHolder(layoutInflater, parent);
         }
 
@@ -96,5 +100,14 @@ public class CrimeListFragment extends Fragment {
         public int getItemCount() {
             return mCrimes.size();
         }
+
+      /*  @Override
+        public int getItemViewType(int position) {
+            if (mCrimes.get(position).getRequiresPolice()) {
+                return 0;
+            } else {
+                return 1;
+            }
+        }*/
     }
 }
