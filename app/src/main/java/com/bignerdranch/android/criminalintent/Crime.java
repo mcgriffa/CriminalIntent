@@ -2,6 +2,7 @@ package com.bignerdranch.android.criminalintent;
 
 import java.util.Date;
 import java.util.UUID;
+import android.text.format.DateFormat;
 
 
 public class Crime {
@@ -25,9 +26,14 @@ public class Crime {
         return mTitle;
     }
 
-    public Date getDate() {
+   /* public Date getDate() {
         return mDate;
-    }
+    }*/
+
+   public String getDate() {
+      String date = (String) DateFormat.format("EEE, MMM dd, yyyy", mDate);
+      return date;
+   }
 
     public boolean getRequiresPolice() {
         return mRequiresPolice;
