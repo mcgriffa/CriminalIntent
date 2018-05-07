@@ -26,13 +26,8 @@ public class Crime {
         return mTitle;
     }
 
-   /* public Date getDate() {
-        return mDate;
-    }*/
-
-   public String getDate() {
-      String date = (String) DateFormat.format("EEE, MMM dd, yyyy", mDate);
-      return date;
+   public Date getDate() {
+       return mDate;
    }
 
     public boolean getRequiresPolice() {
