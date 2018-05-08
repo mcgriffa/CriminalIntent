@@ -115,6 +115,7 @@ public class CrimeListFragment extends Fragment {
             mDateTextView.setText(df);
             mSolvedImageView.setVisibility(crime.isSolved() ? View.VISIBLE : View.GONE);
 
+
         }
 
         @Override
