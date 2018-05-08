@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -57,6 +58,21 @@ public class CrimeListFragment extends Fragment {
         inflater.inflate(R.menu.fragment_crime_list, menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.new_crime:
+                Crime crime = new Crime();
+                CrimeLab.get(getActivity()).addCrime(crime);
+                Intent intent = CrimePagerActivity
+                        .newIntent(getActivity(), crime.getId());
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void updateUI() {
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
@@ -75,19 +91,21 @@ public class CrimeListFragment extends Fragment {
 
         private TextView mTitleTextView;
         private TextView mDateTextView;
-        //private Button mPoliceButton;
+        private Button mPoliceButton;
         private ImageView mSolvedImageView;
-        //private TextView mTimeTextView;
 
-        public CrimeHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.list_item_crime, parent, false));
-            //super(inflater.inflate(R.layout.list_item_serious_crime, parent, false));
+        public CrimeHolder(LayoutInflater inflater, ViewGroup parent, int layout) {
+            super(inflater.inflate(layout, parent, false));
             itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.crime_title);
             mDateTextView = (TextView) itemView.findViewById(R.id.crime_date);
             mSolvedImageView = (ImageView) itemView.findViewById(R.id.crime_solved);
-            //mTimeTextView = (TextView) itemView.findViewById();
+
+            if (layout == R.layout.list_item_serious_crime) {
+                mPoliceButton = (Button) itemView.findViewById(R.id.contact_police_button);
+            }
+
         }
 
         public void bind(Crime crime) {
@@ -96,7 +114,7 @@ public class CrimeListFragment extends Fragment {
             String df = (String) DateFormat.format("EEE, MMM dd, yyyy, hh:mm a", mCrime.getDate());
             mDateTextView.setText(df);
             mSolvedImageView.setVisibility(crime.isSolved() ? View.VISIBLE : View.GONE);
-            //mTimeTextView.setText();
+
         }
 
         @Override
@@ -107,43 +125,6 @@ public class CrimeListFragment extends Fragment {
         }
 
     }
-
-   /* private class CrimeHolder1 extends ViewHolder implements View.OnClickListener{
-
-        private Crime mCrime;
-
-        private TextView mTitleTextView;
-        private TextView mDateTextView;
-        private Button mPoliceButton;
-        private ImageView mSolvedImageView;
-
-        public CrimeHolder1(LayoutInflater inflater, ViewGroup parent) {
-            //super(inflater.inflate(R.layout.list_item_crime, parent, false));
-            super(inflater.inflate(R.layout.list_item_serious_crime, parent, false));
-            itemView.setOnClickListener(this);
-
-            mTitleTextView = (TextView) itemView.findViewById(R.id.crime_title);
-            mDateTextView = (TextView) itemView.findViewById(R.id.crime_date);
-            mSolvedImageView = (ImageView) itemView.findViewById(R.id.crime_solved);
-            mPoliceButton = (Button) itemView.findViewById(R.id.contact_police_button);
-        }
-
-        public void bind(Crime crime) {
-            mCrime = crime;
-            mTitleTextView.setText(mCrime.getTitle());
-            String df = (String) DateFormat.format("EEE, MMM dd, yyyy", mCrime.getDate());
-            mDateTextView.setText(df);
-            mSolvedImageView.setVisibility(crime.isSolved() ? View.VISIBLE : View.GONE);
-        }
-
-        @Override
-        public void onClick(View view) {
-
-            Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getId());
-            startActivity(intent);
-        }
-
-    }*/
 
     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
 
@@ -156,25 +137,17 @@ public class CrimeListFragment extends Fragment {
         @Override
         public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            return new CrimeHolder(layoutInflater, parent);
-            /*switch (viewType) {
-                case 0: return new CrimeHolder(layoutInflater, parent);
-                case 1: return new CrimeHolder1(layoutInflater, parent);
-            }*/
+            if (viewType == 0) {
+                return new CrimeHolder(layoutInflater, parent, R.layout.list_item_crime);
+            } else {
+                return new CrimeHolder(layoutInflater, parent, R.layout.list_item_serious_crime);
+            }
         }
 
         @Override
         public void onBindViewHolder(CrimeHolder holder, int position) {
             Crime crime = mCrimes.get(position);
             holder.bind(crime);
-            /*switch (holder.getItemViewType()) {
-                case 0:
-                    CrimeHolder crimeHolder = (CrimeHolder) holder;
-                    crimeHolder.bind(crime);
-                case 1:
-                    CrimeHolder1 crimeHolder1 = (CrimeHolder1) holder;
-                    crimeHolder1.bind(crime);
-            }*/
         }
 
         @Override
@@ -182,13 +155,13 @@ public class CrimeListFragment extends Fragment {
             return mCrimes.size();
         }
 
-       /*@Override
+       @Override
         public int getItemViewType(int position) {
             if (mCrimes.get(position).getRequiresPolice()) {
                 return 1;
             } else {
                 return 0;
             }
-        }*/
+        }
     }
 }

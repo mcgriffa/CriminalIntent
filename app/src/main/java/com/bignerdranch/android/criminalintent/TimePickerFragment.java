@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+//import android.support.annotation.RequiresApi;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.DatePicker;
+
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -24,7 +26,7 @@ public class TimePickerFragment extends DialogFragment {
     private static final String ARG_TIME = "time";
 
     private TimePicker mTimePicker;
-    private DatePicker mDatePicker;
+
 
     public static TimePickerFragment newInstance(Date date) {
         Bundle args = new Bundle();
@@ -51,7 +53,7 @@ public class TimePickerFragment extends DialogFragment {
         View v = LayoutInflater.from(getActivity())
                 .inflate(R.layout.dialog_time, null);
 
-        mTimePicker = (TimePicker) v.findViewById(R.id.dialog_time_picker);
+        mTimePicker = v.findViewById(R.id.dialog_time_picker);
         mTimePicker.setCurrentHour(hour);
         mTimePicker.setCurrentMinute(minute);
 

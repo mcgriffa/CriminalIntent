@@ -25,9 +25,13 @@ public class CrimeLab {
             Crime crime = new Crime();
             crime.setTitle("Crime #" + i);
             crime.setSolved(i % 2 == 0); // Every other one
-            crime.setRequiresPolice(i % 2 == 0); //Every other one
+            crime.setRequiresPolice(i % 2 == 1); //Every other one
             mCrimes.add(crime);
         }
+    }
+
+    public void addCrime(Crime c) {
+        mCrimes.add(c);
     }
 
     public List<Crime> getCrimes() {
