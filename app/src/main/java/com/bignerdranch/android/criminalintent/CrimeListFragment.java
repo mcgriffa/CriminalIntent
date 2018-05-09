@@ -32,6 +32,7 @@ public class CrimeListFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class CrimeListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.new_crime:
+                Log.d("is this working", "yes it is");
                 Crime crime = new Crime();
                 CrimeLab.get(getActivity()).addCrime(crime);
                 Intent intent = CrimePagerActivity
