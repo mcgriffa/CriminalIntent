@@ -157,6 +157,9 @@ public class CrimeListFragment extends Fragment {
             String df = (String) DateFormat.format("EEE, MMM dd, yyyy, hh:mm a", mCrime.getDate());
             mDateTextView.setText(df);
             mSolvedImageView.setVisibility(crime.isSolved() ? View.VISIBLE : View.GONE);
+            if (crime.isSolved()) {
+                mPoliceButton.setEnabled(false);
+            }
 
 
         }
@@ -201,7 +204,7 @@ public class CrimeListFragment extends Fragment {
 
        @Override
         public int getItemViewType(int position) {
-            if (mCrimes.get(position).getRequiresPolice()) {
+            if (mCrimes.get(position).isPoliceRequired()) {
                 return 1;
             } else {
                 return 0;
