@@ -46,7 +46,7 @@ public class Crime {
         this.mDate = mDate;
     }
 
-    public void setPoliceRequired(boolean mRequiresPolice) {
+    public void setRequiresPolice(boolean mRequiresPolice) {
         this.mRequiresPolice = mRequiresPolice;
     }
 

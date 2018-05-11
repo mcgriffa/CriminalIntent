@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -84,7 +82,7 @@ public class CrimeListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.new_crime:
-                Log.d("is this working", "yes it is");
+                //Log.d("is this working", "yes it is");
                 Crime crime = new Crime();
                 CrimeLab.get(getActivity()).addCrime(crime);
                 Intent intent = CrimePagerActivity
@@ -157,10 +155,10 @@ public class CrimeListFragment extends Fragment {
             String df = (String) DateFormat.format("EEE, MMM dd, yyyy, hh:mm a", mCrime.getDate());
             mDateTextView.setText(df);
             mSolvedImageView.setVisibility(crime.isSolved() ? View.VISIBLE : View.GONE);
+
             if (crime.isSolved()) {
                 mPoliceButton.setEnabled(false);
             }
-
 
         }
 

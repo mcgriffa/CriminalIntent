@@ -127,13 +127,13 @@ public class CrimeFragment extends Fragment {
             }
         });
 
-        mPoliceRequired = (CheckBox)v.findViewById(R.id.police_required);
+        mPoliceRequired = (CheckBox)v.findViewById(R.id.contact_police);
         mPoliceRequired.setChecked(mCrime.isPoliceRequired());
         mPoliceRequired.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
                                          boolean isChecked) {
-                mCrime.setPoliceRequired(isChecked);
+                mCrime.setRequiresPolice(isChecked);
             }
         });
 

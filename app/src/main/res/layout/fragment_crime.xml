@@ -41,11 +41,9 @@
         android:text="@string/crime_solved_label"/>
 
     <CheckBox
-        android:id="@+id/police_required"
+        android:id="@+id/contact_police"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/police_required"/>
-
-
+        android:text="@string/call_police"/>
 
 </LinearLayout>
