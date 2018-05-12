@@ -156,7 +156,7 @@ public class CrimeListFragment extends Fragment {
             mDateTextView.setText(df);
             mSolvedImageView.setVisibility(crime.isSolved() ? View.VISIBLE : View.GONE);
 
-            if (crime.isSolved()) {
+            if (crime.isSolved() && mPoliceButton != null) {
                 mPoliceButton.setEnabled(false);
             }
 
